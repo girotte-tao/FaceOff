@@ -8,7 +8,7 @@ class DeepfakeModel:
         self.script_path = script_path
 
     def run(self, video_path):
-        command = f"conda run -n {self.conda_env} python {self.script_path} {video_path}"
+        command = f"conda run -n {self.conda_env} python {self.script_path} --video_path {video_path}"
         try:
             result = subprocess.run(command, shell=True, capture_output=True, text=True)
             if result.returncode != 0:
@@ -39,10 +39,10 @@ class DeepfakeDetectionAdapter:
 
 # 示例使用
 adapter = DeepfakeDetectionAdapter()
-adapter.add_model("ICT", "VFD0", "/path/to/model1/predict.py")
-adapter.add_model("VFD", "env_model2", "")
+# adapter.add_model("ICT", "VFD0", "/path/to/model1/predict.py")
+adapter.add_model("VFD", "VFD0", "/userhome/cs2/u3619603/VFD/detect1.py")
 
-video_path = "/path/to/video.mp4"
-model_name = "model1"
+video_path = "'/userhome/cs2/u3619603/FakeAVCeleb/RealVideo-RealAudio/Asian (South)/men/id00032/00028.mp4'"
+model_name = "VFD"
 is_deepfake = adapter.detect(model_name, video_path)
 print(f"Is the video a deepfake? {is_deepfake}")
