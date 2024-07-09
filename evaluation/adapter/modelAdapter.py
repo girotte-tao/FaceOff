@@ -39,16 +39,16 @@ class DeepfakeDetectionAdapter:
 
 
 # 示例使用
-adapter = DeepfakeDetectionAdapter()
-# adapter.add_model("ICT", "VFD0", "/path/to/model1/predict.py")
-adapter.add_model("VFD", "VFD0", "/userhome/cs2/u3619712/VFD/detect1.py")
-adapter.add_model("MRDF", "mrdf2", "/userhome/cs2/u3619712/MRDF/detect1.py")
-adapter.add_model("ICT", "ICT0", "/userhome/cs2/u3619712/ICT_DeepFake/detect1.py")
+# adapter = DeepfakeDetectionAdapter()
+# # adapter.add_model("ICT", "VFD0", "/path/to/model1/predict.py")
+# adapter.add_model("VFD", "VFD0", "/userhome/cs2/u3619712/VFD/detect1.py")
+# adapter.add_model("MRDF", "mrdf2", "/userhome/cs2/u3619712/MRDF/detect1.py")
+# adapter.add_model("ICT", "ICT0", "/userhome/cs2/u3619712/ICT_DeepFake/detect1.py")
 
-video_path = "'/userhome/cs2/u3619712/MRDF/data/FakeAVCeleb_v1.2/FakeAVCeleb/RealVideo-RealAudio/Asian-South/men/id00032/00028.mp4'"
-model_name = "VFD"
-model_name = "MRDF"
-model_name = 'ICT'
+# video_path = "'/userhome/cs2/u3619712/MRDF/data/FakeAVCeleb_v1.2/FakeAVCeleb/RealVideo-RealAudio/Asian-South/men/id00032/00028.mp4'"
+# model_name = "VFD"
+# model_name = "MRDF"
+# model_name = 'ICT'
 
-is_deepfake = adapter.detect(model_name, video_path)
-print(f"Is the video a deepfake? {model_name}: {is_deepfake}")
+# is_deepfake = adapter.detect(model_name, video_path)
+# print(f"Is the video a deepfake? {model_name}: {is_deepfake}")
