@@ -15,8 +15,9 @@ class DeepfakeModel:
                 print(f"Error running model {self.name}: {result.stderr}")
                 return False
 
-            output = result.stdout.strip()
-            return output.lower() == "true"
+            output_lines = result.stdout.strip().splitlines()
+            last_line = output_lines[-1]
+            return last_line.lower() == "true"
         except Exception as e:
             print(f"Exception occurred: {e}")
             return False
@@ -40,9 +41,14 @@ class DeepfakeDetectionAdapter:
 # 示例使用
 adapter = DeepfakeDetectionAdapter()
 # adapter.add_model("ICT", "VFD0", "/path/to/model1/predict.py")
-adapter.add_model("VFD", "VFD0", "/userhome/cs2/u3619603/VFD/detect1.py")
+adapter.add_model("VFD", "VFD0", "/userhome/cs2/u3619712/VFD/detect1.py")
+adapter.add_model("MRDF", "mrdf2", "/userhome/cs2/u3619712/MRDF/detect1.py")
+adapter.add_model("ICT", "ICT0", "/userhome/cs2/u3619712/ICT_DeepFake/detect1.py")
 
-video_path = "'/userhome/cs2/u3619603/FakeAVCeleb/RealVideo-RealAudio/Asian (South)/men/id00032/00028.mp4'"
+video_path = "'/userhome/cs2/u3619712/MRDF/data/FakeAVCeleb_v1.2/FakeAVCeleb/RealVideo-RealAudio/Asian-South/men/id00032/00028.mp4'"
 model_name = "VFD"
+model_name = "MRDF"
+model_name = 'ICT'
+
 is_deepfake = adapter.detect(model_name, video_path)
-print(f"Is the video a deepfake? {is_deepfake}")
+print(f"Is the video a deepfake? {model_name}: {is_deepfake}")
