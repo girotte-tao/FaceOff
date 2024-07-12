@@ -1,0 +1,95 @@
+.checkbox-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.checkbox-container .ant-checkbox-group {
+    display: flex;
+    gap: 20px;
+}
+
+.ant-checkbox-group-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+    border: 1px solid #d9d9d9;
+    border-radius: 4px;
+    background-color: #f5f5f5;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.ant-checkbox-group-item:hover {
+    border-color: #1890ff;
+}
+
+.ant-checkbox-checked .ant-checkbox-group-item {
+    border-color: #1890ff;
+    background-color: #e6f7ff;
+}
+
+.video-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.video-group {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1200px;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.video-upload {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 10px;
+    max-width: 45%;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.result-video {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.detection-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    gap: 20px;
+}
+
+.detection-results {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.detection-results ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.detection-results li {
+    margin-bottom: 10px;
+}

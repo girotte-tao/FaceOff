@@ -1,26 +1,45 @@
 import React from 'react';
-import logo from './logo.svg';
+import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
+import { Layout, Menu } from 'antd';
+import routes from '../src/components/Routes';
 import './App.css';
 
-function App() {
+const { Header, Content, Footer } = Layout;
+
+const App: React.FC = () => (
+    <Router>
+      <MainLayout />
+    </Router>
+);
+
+const MainLayout: React.FC = () => {
+  const location = useLocation();
+  const selectedKey = routes.find(route => route.path === location.pathname)?.key || 'home';
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <Layout className="layout">
+        <Header>
+          <div className="logo" />
+          <Menu theme="dark" mode="horizontal" selectedKeys={[selectedKey]}>
+            {routes.map(route => (
+                <Menu.Item key={route.key}>
+                  <Link to={route.path}>{route.label}</Link>
+                </Menu.Item>
+            ))}
+          </Menu>
+        </Header>
+        <Content style={{ padding: '0 50px' }}>
+          <div className="site-layout-content" style={{'height': '80vw'}}>
+            <Routes>
+              {routes.map(route => (
+                  <Route key={route.key} path={route.path} element={<route.Component />} />
+              ))}
+            </Routes>
+          </div>
+        </Content>
+        {/*<Footer style={{ textAlign: 'center' }}>Ant Design ©2023 Created by Ant UED</Footer>*/}
+      </Layout>
   );
-}
+};
 
 export default App;
