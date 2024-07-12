@@ -12,18 +12,18 @@ interface RouteConfig {
 }
 
 const routes: RouteConfig[] = [
-    {
-        path: '/',
-        Component: HomePage,
-        label: 'Home',
-        key: 'home',
-    },
-    {
-        path: '/video-player',
-        Component: VideoPlayerPage,
-        label: 'Video Player',
-        key: 'video-player',
-    },
+    // {
+    //     path: '/',
+    //     Component: HomePage,
+    //     label: 'Home',
+    //     key: 'home',
+    // },
+    // {
+    //     path: '/video-player',
+    //     Component: VideoPlayerPage,
+    //     label: 'Video Player',
+    //     key: 'video-player',
+    // },
     {
         path: '/Pipeline',
         Component: MultiFunctionPage,
