@@ -56,21 +56,19 @@ _DEFAULTS = dict(
         group="size",
         fixed=True),
     architecture=dict(
-        default="df",
+        default="liae",
         info="Model architecture:"
-             "\n\t'df': Keeps the faces more natural."
              "\n\t'liae': Can help fix overly different face shapes.",
         datatype=str,
-        choices=["df", "liae"],
+        choices=["liae"],
         gui_radio=True,
         fixed=True,
         group="network"),
     autoencoder_dims=dict(
-        default=0,
+        default=256,
         info="Face information is stored in AutoEncoder dimensions. If there are not enough "
              "dimensions then certain facial features may not be recognized."
-             "\nHigher number of dimensions are better, but require more VRAM."
-             "\nSet to 0 to use the architecture defaults (256 for liae, 512 for df).",
+             "\nHigher number of dimensions are better, but require more VRAM.",
         datatype=int,
         rounding=32,
         min_max=(0, 1024),

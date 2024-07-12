@@ -500,12 +500,6 @@ class Train():  # pylint:disable=too-few-public-methods
                 imgfile = os.path.join(scriptpath, img)
                 cv2.imwrite(imgfile, image)  # pylint: disable=no-member
                 logger.debug("Saved preview to: '%s'", img)
-            # if self._args.redirect_gui:
-            #     logger.debug("Generating preview for GUI")
-            #     img = TRAININGPREVIEW
-            #     imgfile = os.path.join(scriptpath, "lib", "gui", ".cache", "preview", img)
-            #     cv2.imwrite(imgfile, image)  # pylint: disable=no-member
-            #     logger.debug("Generated preview for GUI: '%s'", imgfile)
             if self._args.preview:
                 logger.debug("Generating preview for display: '%s'", name)
                 self._preview.buffer.add_image(name, image)

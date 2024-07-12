@@ -60,37 +60,18 @@ class Model(ModelBase):
         encoder_a = encoder(inputs[0])
         encoder_b = encoder(inputs[1])
 
-        if self.architecture == "liae":
-            inter_both = self.inter_liae("both", enc_output_shape)
-            int_output_shape = (np.array(inter_both.output_shape[1:]) * (1, 1, 2)).tolist()
+        # using LIAE architecture
+        inter_both = self.inter_liae("both", enc_output_shape)
+        int_output_shape = (np.array(inter_both.output_shape[1:]) * (1, 1, 2)).tolist()
+        inter_a = Concatenate()([inter_both(encoder_a), inter_both(encoder_a)])
+        inter_b = Concatenate()([self.inter_liae("b", enc_output_shape)(encoder_b),inter_both(encoder_b)])
+        decoder = self.decoder("both", int_output_shape)
+        outputs = [decoder(inter_a), decoder(inter_b)]
 
-            inter_a = Concatenate()([inter_both(encoder_a), inter_both(encoder_a)])
-            inter_b = Concatenate()([self.inter_liae("b", enc_output_shape)(encoder_b),
-                                     inter_both(encoder_b)])
-
-            decoder = self.decoder("both", int_output_shape)
-            outputs = [decoder(inter_a), decoder(inter_b)]
-        else:
-            outputs = [self.decoder("a", enc_output_shape)(encoder_a),
-                       self.decoder("b", enc_output_shape)(encoder_b)]
         autoencoder = KModel(inputs, outputs, name=self.model_name)
         return autoencoder
 
-    def encoder_df(self):
-        """ DFL SAE DF Encoder Network"""
-        input_ = Input(shape=self.input_shape)
-        dims = self.input_shape[-1] * self.encoder_dim
-        lowest_dense_res = self.input_shape[0] // 16
-        var_x = Conv2DBlock(dims, activation="leakyrelu")(input_)
-        var_x = Conv2DBlock(dims * 2, activation="leakyrelu")(var_x)
-        var_x = Conv2DBlock(dims * 4, activation="leakyrelu")(var_x)
-        var_x = Conv2DBlock(dims * 8, activation="leakyrelu")(var_x)
-        var_x = Dense(self.ae_dims)(Flatten()(var_x))
-        var_x = Dense(lowest_dense_res * lowest_dense_res * self.ae_dims)(var_x)
-        var_x = Reshape((lowest_dense_res, lowest_dense_res, self.ae_dims))(var_x)
-        var_x = UpscaleBlock(self.ae_dims, activation="leakyrelu")(var_x)
-        return KModel(input_, var_x, name="encoder_df")
-
+    # build LIAE encoder
     def encoder_liae(self):
         """ DFL SAE LIAE Encoder Network """
         input_ = Input(shape=self.input_shape)
@@ -102,6 +83,7 @@ class Model(ModelBase):
         var_x = Flatten()(var_x)
         return KModel(input_, var_x, name="encoder_liae")
 
+    # build LIAE intermediate network
     def inter_liae(self, side, input_shape):
         """ DFL SAE LIAE Intermediate Network """
         input_ = Input(shape=input_shape)
@@ -153,10 +135,7 @@ class Model(ModelBase):
 
     def _legacy_mapping(self):
         """ The mapping of legacy separate model names to single model names """
-        mappings = {"df": {f"{self.name}_encoder.h5": "encoder_df",
-                           f"{self.name}_decoder_A.h5": "decoder_a",
-                           f"{self.name}_decoder_B.h5": "decoder_b"},
-                    "liae": {f"{self.name}_encoder.h5": "encoder_liae",
+        mappings = {"liae": {f"{self.name}_encoder.h5": "encoder_liae",
                              f"{self.name}_intermediate_B.h5": "intermediate_both",
                              f"{self.name}_intermediate.h5": "intermediate_b",
                              f"{self.name}_decoder.h5": "decoder_both"}}
