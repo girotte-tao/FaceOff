@@ -25,3 +25,8 @@ __pycache__/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+
+generation/.fs_cache/*.h5
+generation/config/*.ini
+generation/config/.faceswap

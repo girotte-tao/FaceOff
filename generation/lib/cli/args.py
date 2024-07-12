@@ -386,6 +386,8 @@ class ExtractArgs(ExtractConvertArgs):
             help=_("R|If selected then the input_dir should be a parent folder containing "
                    "multiple videos and/or folders of images you wish to extract from. The faces "
                    "will be output to separate sub-folders in the output_dir.")))
+        
+        # todo add new detector
         argument_list.append(dict(
             opts=("-D", "--detector"),
             action=Radio,
@@ -402,6 +404,8 @@ class ExtractArgs(ExtractConvertArgs):
                    "\nL|s3fd: Best detector. Slow on CPU, faster on GPU. Can detect more faces "
                    "and fewer false positives than other GPU detectors, but is a lot more "
                    "resource intensive.")))
+        
+        # todo add new aligner
         argument_list.append(dict(
             opts=("-A", "--aligner"),
             action=Radio,
@@ -413,6 +417,8 @@ class ExtractArgs(ExtractConvertArgs):
                    "\nL|cv2-dnn: A CPU only landmark detector. Faster, less resource intensive, "
                    "but less accurate. Only use this if not using a GPU and time is important."
                    "\nL|fan: Best aligner. Fast on GPU, slow on CPU.")))
+        
+        # todo add new masker
         argument_list.append(dict(
             opts=("-M", "--masker"),
             action=MultiOption,
