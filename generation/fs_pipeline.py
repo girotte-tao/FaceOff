@@ -1,27 +1,9 @@
 import os
 import subprocess
 import logging
-import smtplib
-from email.message import EmailMessage
 from superR import VideoEnhancer
 import gc,re
 
-# Description: 发送邮件（主题，正文）
-def send_email(subject, body):
-    msg = EmailMessage()
-    msg.set_content(body)
-    msg['Subject'] = subject
-    msg['From'] = 'sqw0510@gmail.com'
-    msg['To'] = '1206199335@qq.com'
-
-    # SMTP 服务器配置，Gmail 589端口发送邮件，993端口接收邮件
-    server = smtplib.SMTP('smtp.gmail.com', 587)
-    server.starttls()
-
-    # 登录邮箱，使用google应用专用密码
-    server.login('sqw0510@gmail.com', 'nnxc ovvt hkhw inca')
-    server.send_message(msg)
-    server.quit()
 
 def setup_logging():
     logging.basicConfig(filename='faceswap_pipeline_2.log', level=logging.INFO,
@@ -61,24 +43,20 @@ def faceswap_pipeline(input_video_1, input_video_2, iterations):
     # Step 1: Extract faces from the first video
     extract_command_1 = f"{start} extract -i {input_video_1} -o {output_images_1}"
     log_and_execute(extract_command_1)
-    send_email(f'extract部分', f'人脸{input_video_1}提取完成')
 
     # Step 2: Extract faces from the second video
     extract_command_2 = f"{start} extract -i {input_video_2} -o {output_images_2}"
     log_and_execute(extract_command_2)
-    send_email(f'extract部分', f'人脸{input_video_2}提取完成')
 
     # Step 3: Train the model using the extracted images, repeating 10 times to reach 50000 iterations
     train_command = f"{start} train -A {output_images_1} -B {output_images_2} -m {model_path} -t dfl-sae -it {iterations}"
     for i in range(10):
         logging.info(f"Training iteration {(i+1)*iterations}")
         log_and_execute(train_command)
-        send_email(f'train部分', f'模型迭代{(i+1)*iterations}完成')
 
     # Step 4: Convert the video using the trained model
     convert_command = f"{start} convert -i {input_video_1} -o {convert_output} -m {model_path} -w ffmpeg"
     log_and_execute(convert_command)
-    send_email(f'convert部分', f'视频转换完成')
 
     # Step 5: Super-Resolution the converted video
     ve=VideoEnhancer()
@@ -87,21 +65,40 @@ def faceswap_pipeline(input_video_1, input_video_2, iterations):
     logging.info(f"Super-Resolution Output: {superR_output}")
 
 
+def process_videos_in_folders(root_folder):
+    # 遍历根文件夹下的所有子文件夹
+    for subdir, dirs, files in os.walk(root_folder):
+        print(subdir)
+        # 确保当前目录下有文件（至少两个视频文件）
+        if len(files) >= 2:
+            # 假设我们只处理每个子文件夹中的前两个视频文件
+            video_files = sorted([file for file in files if file.endswith(('.mp4', '.avi','mov'))])[:2]
+            if len(video_files) == 2:
+                video_path_1 = os.path.join(subdir, video_files[0])
+                video_path_2 = os.path.join(subdir, video_files[1])
+                print(video_path_1, video_path_2)
+                faceswap_pipeline(video_path_1, video_path_2, 5000) 
+            else:
+                print(f"Not enough video files in {subdir} to process.")
+
+
+
 def main():
     setup_logging()
     # Define the input parameters
-    input_video_1 = '/userhome/cs2/u3619674/FaceOff/generation/swap_videos/group4/Trump.mp4'
-    input_video_2 = '/userhome/cs2/u3619674/FaceOff/generation/swap_videos/group4/Musk.mp4'
-    iterations = 5000
+    # input_video_1 = '/userhome/cs2/u3619674/FaceOff/generation/swap_videos/group4/Trump.mp4'
+    # input_video_2 = '/userhome/cs2/u3619674/FaceOff/generation/swap_videos/group4/Musk.mp4'
+    # iterations = 5000
 
     # Log the start of the process
     logging.info("Starting the faceswap pipeline")
 
     # Call the faceswap pipeline method with the parameters
-    faceswap_pipeline(input_video_1, input_video_2, iterations)
+    # faceswap_pipeline(input_video_1, input_video_2, iterations)
 
     # Log the end of the process
     logging.info("Faceswap pipeline completed")
+    process_videos_in_folders('/userhome/cs2/u3619674/FaceOff/generation/swap_videos')
 
 if __name__ == '__main__':
     main()
