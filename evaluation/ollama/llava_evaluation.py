@@ -5,7 +5,6 @@ import os
 import shutil
 from evaluation.ollama.ollama_client import OllamaClient
 
-
 prompt = """
 Please evaluate a given image for deepfake evaluation based on the following criteria. Provide a score for each criterion (1-5) and return the results in a JSON format.
 Higher score means it is a better deepfake.
@@ -67,8 +66,12 @@ def get_response_from_client(media_path, prompt):
 def validate_response(response):
     try:
         clean_response = clean_json_string(response)
-        json.loads(clean_response)
-        return True
+        clean_response_json = json.loads(clean_response)
+        overall_quality = int(clean_response_json['Overall Quality'])
+        if 0 <= overall_quality <= 5:
+            return True
+        else:
+            return False
     except json.JSONDecodeError:
         return False
 
@@ -77,6 +80,7 @@ def clean_json_string(response):
     start_index = response.find("{")
     end_index = response.rfind("}") + 1
     return response[start_index:end_index]
+
 
 def process_media_and_get_response(media_path, prompt, max_retries=5):
     tmp_dir = create_tmp_dir()
@@ -87,17 +91,38 @@ def process_media_and_get_response(media_path, prompt, max_retries=5):
             response = get_response_from_client(media_path, prompt)
             if validate_response(response):
                 return clean_json_string(response)
-            print(f"Attempt {attempt + 1} failed. Retrying...")
+            print(f"{media_path} Attempt {attempt + 1} failed. Retrying...")
 
         raise Exception("Failed to get a valid JSON response after maximum retries")
     finally:
-        # Clean up the temporary directory
         if os.path.exists(tmp_dir):
             shutil.rmtree(tmp_dir)
 
 
-# # 示例调用
-# media_path = '/Users/weitao/dev/codeBase/deepfake/FaceOff/evaluation/ollama/1.jpg'
-# # prompt = "Describe the content of the image"
-# response = process_media_and_get_response(media_path, prompt)
-# print(response)
+def process_directory_and_save_results(input_directory, output_file):
+    results = []
+    tmp_dir = create_tmp_dir()
+    try:
+        for filename in os.listdir(input_directory):
+            file_path = os.path.join(input_directory, filename)
+            if file_path.lower().endswith(('.mp4', '.avi', '.mov')):
+                try:
+                    response = process_media_and_get_response(file_path, prompt)
+                    result = json.loads(response)
+                    result['video_filename'] = filename
+                    results.append(result)
+                except Exception as e:
+                    print(f"Error processing file {filename}: {e}")
+
+        with open(output_file, 'w') as f:
+            for result in results:
+                f.write(json.dumps(result) + '\n')
+    finally:
+        if os.path.exists(tmp_dir):
+            shutil.rmtree(tmp_dir)
+
+
+# 示例调用
+input_directory = 'videos'
+output_file = 'results.jsonl'
+process_directory_and_save_results(input_directory, output_file)

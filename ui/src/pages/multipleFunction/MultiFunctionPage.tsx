@@ -28,7 +28,7 @@ const MultiFunctionPage: React.FC = () => {
         setLoading(true);
         setTimeout(() => {
             setLoading(false);
-            const generatedVideoUrl = "path/to/generated/video"; // 这里应该是生成的视频URL
+            const generatedVideoUrl = "/videos/Neymar_Mbappe_compressed.mp4";
             setResultVideo(generatedVideoUrl);
             if (mode.includes('detection')) {
                 handleStartDetection(generatedVideoUrl);
@@ -40,7 +40,9 @@ const MultiFunctionPage: React.FC = () => {
         setLoading(true);
         setTimeout(() => {
             setLoading(false);
-            const results = selectedModels.map(model => `Detection complete using model: ${model}`);
+            const results = selectedModels.map(model => `Detection complete using model: ${model}, Result: Fake!`);
+            // const results = selectedModels.map(model => `Detection complete using model: ${model}, Result: Fake!${Math.random() > 0.5 ? 'Fake' : 'Real'}!`);
+
             setDetectionResults(results);
             results.forEach(result => {
                 message.success(result);
@@ -91,7 +93,7 @@ const MultiFunctionPage: React.FC = () => {
                     {mode.includes('detection') && (
                         <div className="checkbox-container">
                             <CheckboxGroup
-                                options={['model1', 'model2', 'model3']}
+                                options={['ICT', 'VFD', 'FaceOff']}
                                 onChange={checkedValues => setSelectedModels(checkedValues as string[])}
                                 value={selectedModels}
                                 style={{ margin: '20px 0' }}
@@ -111,7 +113,7 @@ const MultiFunctionPage: React.FC = () => {
             )}
             {resultVideo && (
                 <div className="result-video">
-                    <ReactPlayer url={resultVideo} controls />
+                    <ReactPlayer url={[resultVideo]} controls />
                 </div>
             )}
             {mode.includes('detection') && (
@@ -123,7 +125,7 @@ const MultiFunctionPage: React.FC = () => {
                             </Upload>
                             <div className="checkbox-container">
                                 <CheckboxGroup
-                                    options={['model1', 'model2', 'model3']}
+                                    options={['ICT', 'VFD', 'FaceOff']}
                                     onChange={checkedValues => setSelectedModels(checkedValues as string[])}
                                     value={selectedModels}
                                     style={{ margin: '20px 0' }}
