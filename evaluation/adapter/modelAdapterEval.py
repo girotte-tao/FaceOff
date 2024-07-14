@@ -1,5 +1,7 @@
 import subprocess
 import os
+import pandas as pd
+from tqdm import tqdm 
 
 class DeepfakeModel:
     def __init__(self, name, conda_env, script_path):
@@ -13,14 +15,14 @@ class DeepfakeModel:
             result = subprocess.run(command, shell=True, capture_output=True, text=True)
             if result.returncode != 0:
                 print(f"Error running model {self.name}: {result.stderr}")
-                return False
+                return None
 
             output_lines = result.stdout.strip().splitlines()
             last_line = output_lines[-1]
             return last_line.lower() == "true"
         except Exception as e:
             print(f"Exception occurred: {e}")
-            return False
+            return None
 
 
 class DeepfakeDetectionAdapter:
@@ -37,23 +39,41 @@ class DeepfakeDetectionAdapter:
         model = self.models[model_name]
         return model.run(video_path)
 
+    def detect_all(self, folder_path):
+        results = []
+        videos = [f for f in os.listdir(folder_path) if f.endswith(('.mp4'))]
 
-# 示例使用
+     
+        total_tasks = len(videos) * len(self.models)
+        with tqdm(total=total_tasks) as pbar:
+            for video in videos:
+                video_path = os.path.join(folder_path, video)
+                for model_name in self.models:
+                    is_deepfake = self.detect(model_name, video_path)
+                    results.append({
+                        'video': video,
+                        'model': model_name,
+                        'is_deepfake': is_deepfake
+                    })
+                    
+                    pbar.update(1)
+
+        return results
+
+# examples
 adapter = DeepfakeDetectionAdapter()
-# adapter.add_model("ICT", "VFD0", "/path/to/model1/predict.py")
 adapter.add_model("VFD", "VFD", "/userhome/cs2/u3619712/VFD/detect1.py")
 adapter.add_model("MRDF", "mrdf2", "/userhome/cs2/u3619712/MRDF/detect1.py")
 adapter.add_model("ICT", "ICT0", "/userhome/cs2/u3619712/ICT_DeepFake/detect1.py")
 
-video_path = "'/userhome/cs2/u3619712/MRDF/data/FakeAVCeleb_v1.2/FakeAVCeleb/RealVideo-RealAudio/Asian-South/men/id00032/00028.mp4'"
-# model_name = "VFD"
-model_name = "MRDF"
-# model_name = 'ICT'
+folder_path = "/userhome/cs2/u3619712/FaceOff/evaluation/video_test" 
+folder_path = "/userhome/cs2/u3619712/FaceOff/evaluation/video_eval" 
 
-is_deepfake = adapter.detect(model_name, video_path)
-print(f"Is the video a deepfake? {model_name}: {is_deepfake}")
+results = adapter.detect_all(folder_path)
 
-# for vie
-# for name in ['VFD', 'MRDF', 'ICT']:
-#     is_deepfake = adapter.detect(name, video_path)
-#     print(f"Is the video a deepfake? {name}: {is_deepfake}")
+# result
+df = pd.DataFrame(results)
+output_path = "/userhome/cs2/u3619712/FaceOff/evaluation/detection_results3.csv"
+df.to_csv(output_path, index=False)
+print(f"detection result save in {output_path}")
+
