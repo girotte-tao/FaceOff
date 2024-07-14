@@ -4,3 +4,6 @@
 [submodule "detection/model/VFD"]
 	path = detection/model/VFD
 	url = git@github.com:girotte-tao/VFD.git
+[submodule "detection/model/ICT"]
+	path = detection/model/ICT
+	url = git@github.com:girotte-tao/ICT_DeepFake.git
