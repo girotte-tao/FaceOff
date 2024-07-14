@@ -1,0 +1,6 @@
+[submodule "detection/m"]
+	path = detection/m
+	url = git@github.com:girotte-tao/VFD.git
+[submodule "detection/model/VFD"]
+	path = detection/model/VFD
+	url = git@github.com:girotte-tao/VFD.git
