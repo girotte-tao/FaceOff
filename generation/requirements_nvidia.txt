@@ -4,3 +4,15 @@ nvidia-ml-py>=12.535,<300
 pynvx==1.0.0 ; sys_platform == "darwin"
 tensorflow>=2.10.0,<2.11.0
 numpy>=1.26.0,<2.0.0
+basicsr>=1.4.2
+facexlib>=0.2.5
+lmdb
+opencv-python-headless
+pyyaml
+scipy
+tb-nightly
+torch>=1.7
+torchvision
+tqdm
+yapf
+gfpgan
