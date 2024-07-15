@@ -1,0 +1,35 @@
+2024-07-14 16:29:53:INFO:HubertModel Config: <class 'model.avhubert.hubert.AVHubertConfig'>
+2024-07-14 16:31:14:DEBUG:open file: /userhome/cs2/u3619712/FaceoffModel/outputs/tensorboard_logs/version_0/hparams.yaml
+2024-07-14 16:36:34:DEBUG:open file: /userhome/cs2/u3619712/FaceoffModel/outputs//ckpts/FOM_CE/FOM_CE_FOM_CE_train_1_epoch=0-val_loss=1.824.ckpt
+2024-07-14 16:42:16:DEBUG:open file: /userhome/cs2/u3619712/FaceoffModel/outputs//ckpts/FOM_CE/FOM_CE_FOM_CE_train_1_epoch=1-val_loss=1.546.ckpt
+2024-07-14 16:47:58:DEBUG:open file: /userhome/cs2/u3619712/FaceoffModel/outputs//ckpts/FOM_CE/FOM_CE_FOM_CE_train_1_epoch=2-val_loss=1.276.ckpt
+2024-07-14 16:53:42:DEBUG:open file: /userhome/cs2/u3619712/FaceoffModel/outputs//ckpts/FOM_CE/FOM_CE_FOM_CE_train_1_epoch=3-val_loss=1.284.ckpt
+2024-07-14 16:59:24:DEBUG:open file: /userhome/cs2/u3619712/FaceoffModel/outputs//ckpts/FOM_CE/FOM_CE_FOM_CE_train_1_epoch=4-val_loss=1.127.ckpt
+2024-07-14 17:05:10:DEBUG:open file: /userhome/cs2/u3619712/FaceoffModel/outputs//ckpts/FOM_CE/FOM_CE_FOM_CE_train_1_epoch=5-val_loss=1.201.ckpt
+2024-07-14 17:10:59:DEBUG:open file: /userhome/cs2/u3619712/FaceoffModel/outputs//ckpts/FOM_CE/FOM_CE_FOM_CE_train_1_epoch=5-val_loss=1.201.ckpt
+2024-07-14 17:11:47:INFO:Result of train_1.txt:  test_acc: 0.9125  test_auroc: 0.8917  test_real_f1score: 0.8293  test_real_recall: 0.8500  test_real_precision: 0.8095  test_fake_f1score: 0.9412  test_fake_recall: 0.9333  test_fake_precision: 0.9492 
+2024-07-14 17:11:47:INFO:HubertModel Config: <class 'model.avhubert.hubert.AVHubertConfig'>
+2024-07-14 17:17:25:DEBUG:open file: /userhome/cs2/u3619712/FaceoffModel/outputs//ckpts/FOM_CE/FOM_CE_FOM_CE_train_2_epoch=0-val_loss=1.855.ckpt
+2024-07-14 17:23:07:DEBUG:open file: /userhome/cs2/u3619712/FaceoffModel/outputs//ckpts/FOM_CE/FOM_CE_FOM_CE_train_2_epoch=1-val_loss=2.118.ckpt
+2024-07-14 17:28:46:DEBUG:open file: /userhome/cs2/u3619712/FaceoffModel/outputs//ckpts/FOM_CE/FOM_CE_FOM_CE_train_2_epoch=2-val_loss=1.423.ckpt
+2024-07-14 17:34:30:DEBUG:open file: /userhome/cs2/u3619712/FaceoffModel/outputs//ckpts/FOM_CE/FOM_CE_FOM_CE_train_2_epoch=3-val_loss=1.184.ckpt
+2024-07-14 17:40:12:DEBUG:open file: /userhome/cs2/u3619712/FaceoffModel/outputs//ckpts/FOM_CE/FOM_CE_FOM_CE_train_2_epoch=3-val_loss=1.184.ckpt
+2024-07-14 17:41:00:INFO:Result of train_2.txt:  test_acc: 0.8800  test_auroc: 0.8133  test_real_f1score: 0.7391  test_real_recall: 0.6800  test_real_precision: 0.8095  test_fake_f1score: 0.9221  test_fake_recall: 0.9467  test_fake_precision: 0.8987 
+2024-07-14 17:41:00:INFO:HubertModel Config: <class 'model.avhubert.hubert.AVHubertConfig'>
+2024-07-14 17:46:34:DEBUG:open file: /userhome/cs2/u3619712/FaceoffModel/outputs//ckpts/FOM_CE/FOM_CE_FOM_CE_train_3_epoch=0-val_loss=1.976.ckpt
+2024-07-14 17:52:12:DEBUG:open file: /userhome/cs2/u3619712/FaceoffModel/outputs//ckpts/FOM_CE/FOM_CE_FOM_CE_train_3_epoch=1-val_loss=1.551.ckpt
+2024-07-14 17:57:55:DEBUG:open file: /userhome/cs2/u3619712/FaceoffModel/outputs//ckpts/FOM_CE/FOM_CE_FOM_CE_train_3_epoch=2-val_loss=1.416.ckpt
+2024-07-14 18:03:34:DEBUG:open file: /userhome/cs2/u3619712/FaceoffModel/outputs//ckpts/FOM_CE/FOM_CE_FOM_CE_train_3_epoch=3-val_loss=1.134.ckpt
+2024-07-14 18:09:19:DEBUG:open file: /userhome/cs2/u3619712/FaceoffModel/outputs//ckpts/FOM_CE/FOM_CE_FOM_CE_train_3_epoch=3-val_loss=1.134.ckpt
+2024-07-14 18:10:07:INFO:Result of train_3.txt:  test_acc: 0.8925  test_auroc: 0.8317  test_real_f1score: 0.7676  test_real_recall: 0.7100  test_real_precision: 0.8353  test_fake_f1score: 0.9301  test_fake_recall: 0.9533  test_fake_precision: 0.9079 
+2024-07-14 18:10:07:INFO:HubertModel Config: <class 'model.avhubert.hubert.AVHubertConfig'>
+2024-07-14 18:15:43:DEBUG:open file: /userhome/cs2/u3619712/FaceoffModel/outputs//ckpts/FOM_CE/FOM_CE_FOM_CE_train_4_epoch=0-val_loss=1.907.ckpt
+2024-07-14 18:21:25:DEBUG:open file: /userhome/cs2/u3619712/FaceoffModel/outputs//ckpts/FOM_CE/FOM_CE_FOM_CE_train_4_epoch=0-val_loss=1.907.ckpt
+2024-07-14 18:22:12:INFO:Result of train_4.txt:  test_acc: 0.7475  test_auroc: 0.6917  test_real_f1score: 0.5346  test_real_recall: 0.5800  test_real_precision: 0.4957  test_fake_f1score: 0.8268  test_fake_recall: 0.8033  test_fake_precision: 0.8516 
+2024-07-14 18:22:12:INFO:HubertModel Config: <class 'model.avhubert.hubert.AVHubertConfig'>
+2024-07-14 18:27:50:DEBUG:open file: /userhome/cs2/u3619712/FaceoffModel/outputs//ckpts/FOM_CE/FOM_CE_FOM_CE_train_5_epoch=0-val_loss=1.653.ckpt
+2024-07-14 18:33:33:DEBUG:open file: /userhome/cs2/u3619712/FaceoffModel/outputs//ckpts/FOM_CE/FOM_CE_FOM_CE_train_5_epoch=1-val_loss=1.821.ckpt
+2024-07-14 18:39:13:DEBUG:open file: /userhome/cs2/u3619712/FaceoffModel/outputs//ckpts/FOM_CE/FOM_CE_FOM_CE_train_5_epoch=2-val_loss=1.484.ckpt
+2024-07-14 18:44:50:DEBUG:open file: /userhome/cs2/u3619712/FaceoffModel/outputs//ckpts/FOM_CE/FOM_CE_FOM_CE_train_5_epoch=2-val_loss=1.484.ckpt
+2024-07-14 18:45:37:INFO:Result of train_5.txt:  test_acc: 0.8375  test_auroc: 0.7150  test_real_f1score: 0.5912  test_real_recall: 0.4700  test_real_precision: 0.7966  test_fake_f1score: 0.8986  test_fake_recall: 0.9600  test_fake_precision: 0.8446 
+2024-07-14 18:45:37:INFO:Final Average Performance:  test_acc: 0.8540  test_auroc: 0.7887  test_real_f1score: 0.6923  test_real_recall: 0.6580  test_real_precision: 0.7493  test_fake_f1score: 0.9037  test_fake_recall: 0.9193  test_fake_precision: 0.8904 
