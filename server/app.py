@@ -16,7 +16,7 @@ app = Flask(__name__)
 
 adapter = modelAdapter.DeepfakeDetectionAdapter()
 adapter.add_model("VFD", "VFD0", "/userhome/cs2/u3619712/VFD/detect1.py")
-adapter.add_model("MRDF", "mrdf2", "/userhome/cs2/u3619712/MRDF/detect1.py")
+adapter.add_model("FaceOff", "mrdf2", "/userhome/cs2/u3619712/MRDF/detect1.py")
 adapter.add_model("ICT", "ICT0", "/userhome/cs2/u3619712/ICT_DeepFake/detect1.py")
 
 video_path = "'/userhome/cs2/u3619712/MRDF/data/FakeAVCeleb_v1.2/FakeAVCeleb/RealVideo-RealAudio/Asian-South/men/id00032/00028.mp4'"
