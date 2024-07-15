@@ -3,3 +3,4 @@
 nvidia-ml-py>=12.535,<300
 pynvx==1.0.0 ; sys_platform == "darwin"
 tensorflow>=2.10.0,<2.11.0
+numpy>=1.26.0,<2.0.0
