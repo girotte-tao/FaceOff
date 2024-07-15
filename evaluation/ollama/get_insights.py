@@ -62,6 +62,6 @@ def calculate_statistics_from_jsonl(input_jsonl, output_txt):
         f.write(json.dumps(median_overall_quality_element, ensure_ascii=False) + '\n')
 
 # 示例调用
-input_jsonl = 'results_1.jsonl'
+input_jsonl = 'results.jsonl'
 output_txt = 'statistics_llava_evaluation_generated_deepfake.txt'
 calculate_statistics_from_jsonl(input_jsonl, output_txt)
